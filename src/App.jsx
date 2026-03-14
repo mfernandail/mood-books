@@ -1,34 +1,62 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useMemo, useState } from 'react'
+import { supabase } from './lib/supabaseClient'
 import './App.css'
 
+const moods = ['serena', 'vibrante', 'curiosa', 'valiente']
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [status, setStatus] = useState({ loading: false, error: '' })
+  const accentWord = useMemo(
+    () => moods[Math.floor(Math.random() * moods.length)],
+    [],
+  )
+
+  const handleGoogleLogin = async () => {
+    setStatus({ loading: true, error: '' })
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin,
+      },
+    })
+
+    if (error) {
+      setStatus({ loading: false, error: error.message })
+      return
+    }
+
+    setStatus({ loading: false, error: '' })
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+    <main className="page">
+      <div className="orb orb-left" aria-hidden="true" />
+      <div className="orb orb-right" aria-hidden="true" />
+
+      <section className="panel">
+        <p className="eyebrow">Mood Books</p>
+        <h1>Inicia sesión y deja que tu lectura se vuelva {accentWord}.</h1>
+        <p className="lead">
+          Conecta tu cuenta de Google para sincronizar tus estados de ánimo con
+          recomendaciones creadas a tu medida.
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+
+        <button
+          className="google-button"
+          onClick={handleGoogleLogin}
+          disabled={status.loading}
+        >
+          {status.loading ? 'Conectando...' : 'Entrar con Google'}
+        </button>
+
+        {status.error ? <p className="error">{status.error}</p> : null}
+
+        <p className="footnote">
+          Usamos Google únicamente para autenticarte. No publicamos nada sin tu
+          permiso.
+        </p>
+      </section>
+    </main>
   )
 }
 
