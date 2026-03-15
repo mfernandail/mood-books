@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import styles from '../styles/SessionPanel.module.css'
 
 export function SessionPanel({ user }) {
   const [status, setStatus] = useState({ loading: false, error: '' })
@@ -42,7 +43,7 @@ export function SessionPanel({ user }) {
   }
 
   return (
-    <section className="panel panel--session">
+    <section className={`panel ${styles.panelSession}`}>
       <p className="eyebrow">Mood Books</p>
       <h1>
         Hola, {profile.fullName.split(' ')[0] || 'lector'}. Tu energía ya
@@ -53,52 +54,55 @@ export function SessionPanel({ user }) {
         lecturas que acompañen el momento.
       </p>
 
-      <div className="session-card">
-        <div className="session-user">
+      <div className={styles.sessionCard}>
+        <div className={styles.sessionUser}>
           {profile.picture ? (
             <img
               src={profile.picture}
               alt={profile.fullName}
-              className="avatar"
+              className={styles.avatar}
             />
           ) : (
-            <div className="avatar avatar--fallback" aria-hidden="true">
+            <div
+              className={`${styles.avatar} ${styles.avatarFallback}`}
+              aria-hidden="true"
+            >
               {profile.initials}
             </div>
           )}
 
           <div>
-            <p className="session-name">{profile.fullName}</p>
-            <p className="session-email">{profile.email}</p>
+            <p className={styles.sessionName}>{profile.fullName}</p>
+            <p className={styles.sessionEmail}>{profile.email}</p>
           </div>
         </div>
 
-        <dl className="session-meta">
-          <div>
+        <dl className={styles.sessionMeta}>
+          <div className={styles.sessionMetaItem}>
             <dt>ID</dt>
             <dd>{user.id.slice(0, 8)}...</dd>
           </div>
-          <div>
+          <div className={styles.sessionMetaItem}>
             <dt>Último acceso</dt>
             <dd>{profile.lastSignIn}</dd>
           </div>
         </dl>
       </div>
 
-      <div className="session-actions">
+      <div className={styles.sessionActions}>
         <button
-          className="logout-button"
+          className={styles.logoutButton}
           onClick={handleSignOut}
           disabled={status.loading}
         >
           {status.loading ? 'Cerrando sesión...' : 'Cerrar sesión'}
         </button>
-        <button className="secondary-button" type="button">
+        <button className={styles.secondaryButton} type="button">
           Ver biblioteca personalizada
         </button>
       </div>
 
-      {status.error ? <p className="error">{status.error}</p> : null}
+      {status.error ? <p className={styles.error}>{status.error}</p> : null}
     </section>
   )
 }
