@@ -1,61 +1,82 @@
-import { useMemo, useState } from 'react'
-import { supabase } from './lib/supabaseClient'
+import { useEffect, useMemo, useState } from 'react'
 import './App.css'
+import { LoginPanel } from './components/LoginPanel'
+import { SessionPanel } from './components/SessionPanel'
+import { supabase } from './lib/supabaseClient'
 
-const moods = ['serena', 'vibrante', 'curiosa', 'valiente']
-
-function App() {
-  const [status, setStatus] = useState({ loading: false, error: '' })
-  const accentWord = useMemo(
-    () => moods[Math.floor(Math.random() * moods.length)],
-    [],
-  )
-
-  const handleGoogleLogin = async () => {
-    setStatus({ loading: true, error: '' })
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo: window.location.origin,
-      },
-    })
-
-    if (error) {
-      setStatus({ loading: false, error: error.message })
-      return
-    }
-
-    setStatus({ loading: false, error: '' })
-  }
+function LoadingPanel() {
+  const accent = useMemo(() => {
+    const phrases = [
+      'Sincronizando tu estado...',
+      'Buscando coincidencias literarias...',
+      'Afinando recomendaciones a tu ánimo...',
+    ]
+    return phrases[Math.floor(Math.random() * phrases.length)]
+  }, [])
 
   return (
-    <main className="page">
+    <section className="panel panel--loading">
+      <p className="eyebrow">Mood Books</p>
+      <h1>Preparando tu rincón personal.</h1>
+      <p className="lead">{accent}</p>
+      <div className="spinner" aria-hidden="true" />
+    </section>
+  )
+}
+
+function App() {
+  const [session, setSession] = useState(null)
+  const [checkingSession, setCheckingSession] = useState(true)
+
+  useEffect(() => {
+    let isMounted = true
+
+    supabase.auth
+      .getSession()
+      .then(({ data }) => {
+        if (!isMounted) {
+          return
+        }
+        setSession(data.session)
+      })
+      .finally(() => {
+        if (isMounted) {
+          setCheckingSession(false)
+        }
+      })
+
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, newSession) => {
+        if (isMounted) {
+          setSession(newSession)
+        }
+      },
+    )
+
+    return () => {
+      isMounted = false
+      listener?.subscription?.unsubscribe()
+    }
+  }, [])
+
+  const pageMode = checkingSession
+    ? 'page--loading'
+    : session
+      ? 'page--session'
+      : 'page--login'
+
+  return (
+    <main className={`page ${pageMode}`}>
       <div className="orb orb-left" aria-hidden="true" />
       <div className="orb orb-right" aria-hidden="true" />
 
-      <section className="panel">
-        <p className="eyebrow">Mood Books</p>
-        <h1>Inicia sesión y deja que tu lectura se vuelva {accentWord}.</h1>
-        <p className="lead">
-          Conecta tu cuenta de Google para sincronizar tus estados de ánimo con
-          recomendaciones creadas a tu medida.
-        </p>
-
-        <button
-          className="google-button"
-          onClick={handleGoogleLogin}
-          disabled={status.loading}
-        >
-          {status.loading ? 'Conectando...' : 'Entrar con Google'}
-        </button>
-
-        {status.error ? <p className="error">{status.error}</p> : null}
-
-        <p className="footnote">
-          Usamos Google únicamente para autenticarte. No publicamos nada sin tu
-          permiso.
-        </p>
-      </section>
+      {checkingSession ? (
+        <LoadingPanel />
+      ) : session ? (
+        <SessionPanel user={session.user} />
+      ) : (
+        <LoginPanel />
+      )}
     </main>
   )
 }
