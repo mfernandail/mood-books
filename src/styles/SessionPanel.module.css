@@ -1,0 +1,147 @@
+.panelSession {
+  width: min(660px, 100%);
+  border: 1px solid var(--border-soft);
+}
+
+.sessionCard {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 24px;
+  background: #f9f9f6;
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sessionUser {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-strong);
+}
+
+.avatarFallback {
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+  background: #f1f2f6;
+  color: var(--accent-dark);
+}
+
+.sessionName {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.sessionEmail {
+  margin: 0.1rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.96rem;
+}
+
+.sessionMeta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.sessionMetaItem {
+  padding: 0.9rem 1rem;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid var(--border-soft);
+}
+
+.sessionMetaItem dt {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-muted);
+  margin: 0 0 0.35rem;
+}
+
+.sessionMetaItem dd {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--ink);
+}
+
+.sessionActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+.logoutButton {
+  flex: 1;
+  border: 1px solid var(--accent-dark);
+  border-radius: 999px;
+  padding: 0.85rem 1.5rem;
+  background: var(--accent-dark);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.18);
+}
+
+.logoutButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: #1c1f26;
+}
+
+.logoutButton:disabled {
+  opacity: 0.6;
+  cursor: wait;
+  box-shadow: none;
+}
+
+.secondaryButton {
+  flex: 1;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  padding: 0.85rem 1.5rem;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    background 180ms ease;
+}
+
+.secondaryButton:hover {
+  border-color: var(--accent-dark);
+  color: var(--accent-dark);
+  background: #f6f7fb;
+}
+
+.error {
+  color: #e45865;
+  margin-top: 1rem;
+  min-height: 1.4rem;
+}
+
+@media (max-width: 640px) {
+  .sessionCard {
+    padding: 1.25rem;
+  }
+
+  .sessionActions {
+    flex-direction: column;
+  }
+}

@@ -1,31 +1,19 @@
 .page {
   position: relative;
   min-height: 100vh;
-  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(1.5rem, 7vw, 6rem);
+  padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 6vw, 4rem);
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  isolation: isolate;
 }
 
 .panel {
   width: min(560px, 100%);
-  background: rgba(6, 7, 16, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 32px;
-  padding: clamp(2.5rem, 5vw, 4rem);
-  box-shadow: 0 35px 120px rgba(6, 8, 17, 0.7);
-  backdrop-filter: blur(24px);
-}
-
-.panel--session {
-  width: min(680px, 100%);
-  background: linear-gradient(
-    145deg,
-    rgba(8, 10, 25, 0.92),
-    rgba(5, 6, 18, 0.85)
-  );
+  background: var(--panel-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 28px;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.08);
 }
 
 .panel--loading {
@@ -34,9 +22,9 @@
 
 .eyebrow {
   text-transform: uppercase;
-  letter-spacing: 0.4em;
-  font-size: 0.78rem;
-  color: var(--accent-lime);
+  letter-spacing: 0.35em;
+  font-size: 0.75rem;
+  color: var(--accent-muted);
   margin-bottom: 1rem;
 }
 
@@ -44,117 +32,28 @@ h1 {
   margin: 0 0 1.25rem;
   font-size: clamp(2.5rem, 5vw, 3.8rem);
   line-height: 1.1;
-  color: #f6f6ff;
+  color: var(--ink);
 }
 
 .lead {
   margin: 0 0 2rem;
-  font-size: 1.1rem;
-  color: #cbd2ff;
-  line-height: 1.6;
-}
-
-.google-button {
-  width: 100%;
-  border: none;
-  border-radius: 999px;
-  padding: 0.9rem 1.2rem;
-  background: linear-gradient(120deg, var(--accent-lime), #f8ffd9);
-  color: #0a0c1a;
   font-size: 1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  cursor: pointer;
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease;
-  box-shadow: 0 15px 25px rgba(208, 255, 126, 0.35);
-}
-
-.google-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 25px 35px rgba(208, 255, 126, 0.4);
-}
-
-.google-button:disabled {
-  opacity: 0.65;
-  cursor: wait;
-}
-
-.google-icon {
-  width: 1.3rem;
-  height: 1.3rem;
-  display: inline-flex;
-}
-
-.google-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.error {
-  color: #ff9898;
-  margin-top: 1rem;
-  min-height: 1.4rem;
-}
-
-.footnote {
-  margin-top: 2rem;
-  color: #8f95be;
-  font-size: 0.92rem;
-  line-height: 1.5;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  text-align: center;
 }
 
 .orb {
-  position: absolute;
-  width: 360px;
-  height: 360px;
-  border-radius: 50%;
-  filter: blur(70px);
-  opacity: 0.9;
-  z-index: -1;
-  animation: float 12s ease-in-out infinite;
-}
-
-.orb-left {
-  left: -10%;
-  top: 20%;
-  background: radial-gradient(circle, #7b5bff 0%, transparent 65%);
-}
-
-.orb-right {
-  right: -5%;
-  bottom: -10%;
-  background: radial-gradient(
-    circle,
-    rgba(208, 255, 126, 0.7) 0%,
-    transparent 70%
-  );
-  animation-delay: -4s;
-}
-
-@keyframes float {
-  0% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-25px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
+  display: none;
 }
 
 @media (max-width: 640px) {
   .panel {
-    border-radius: 24px;
+    border-radius: 22px;
   }
 
-  .eyebrow {
-    letter-spacing: 0.3em;
+  .page {
+    padding: 1.5rem;
   }
 }
 
@@ -162,8 +61,8 @@ h1 {
   width: 70px;
   height: 70px;
   margin: 1.5rem auto 0;
-  border: 3px solid rgba(255, 255, 255, 0.15);
-  border-top-color: var(--accent-lime);
+  border: 3px solid var(--border-soft);
+  border-top-color: var(--accent-dark);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
@@ -174,141 +73,5 @@ h1 {
   }
   to {
     transform: rotate(360deg);
-  }
-}
-
-.session-card {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.session-user {
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-}
-
-.avatar {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-}
-
-.avatar--fallback {
-  display: grid;
-  place-items: center;
-  font-weight: 600;
-  background: rgba(208, 255, 126, 0.2);
-  color: var(--accent-lime);
-}
-
-.session-name {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.session-email {
-  margin: 0.1rem 0 0;
-  color: #b2b7d8;
-  font-size: 0.96rem;
-}
-
-.session-meta {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem;
-  margin: 0;
-}
-
-.session-meta div {
-  padding: 0.9rem 1rem;
-  border-radius: 16px;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-.session-meta dt {
-  font-size: 0.75rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #8f95be;
-  margin: 0 0 0.3rem;
-}
-
-.session-meta dd {
-  margin: 0;
-  font-size: 0.95rem;
-  color: #f6f7ff;
-}
-
-.session-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.logout-button {
-  flex: 1;
-  border: none;
-  border-radius: 999px;
-  padding: 0.85rem 1.5rem;
-  background: linear-gradient(120deg, #ff8fb3, #ffb47d);
-  color: #0a0c1a;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    transform 180ms ease,
-    box-shadow 180ms ease;
-  box-shadow: 0 15px 30px rgba(255, 154, 148, 0.35);
-}
-
-.logout-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 25px 40px rgba(255, 154, 148, 0.4);
-}
-
-.logout-button:disabled {
-  opacity: 0.6;
-  cursor: wait;
-}
-
-.secondary-button {
-  flex: 1;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  padding: 0.85rem 1.5rem;
-  background: transparent;
-  color: #f6f6ff;
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    border-color 180ms ease,
-    color 180ms ease,
-    background 180ms ease;
-}
-
-.secondary-button:hover {
-  border-color: var(--accent-lime);
-  color: var(--accent-lime);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-@media (max-width: 640px) {
-  .session-card {
-    padding: 1.25rem;
-  }
-
-  .session-actions {
-    flex-direction: column;
   }
 }
