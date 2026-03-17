@@ -4,6 +4,7 @@ import styles from '../styles/SessionPanel.module.css'
 
 export function SessionPanel({ user }) {
   const [status, setStatus] = useState({ loading: false, error: '' })
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const profile = useMemo(() => {
     const metadata = user?.user_metadata ?? {}
     const fullName =
@@ -40,12 +41,103 @@ export function SessionPanel({ user }) {
     }
 
     setStatus({ loading: false, error: '' })
+    setIsMenuOpen(false)
+  }
+
+  const toggleMenu = () => {
+    setIsMenuOpen((prev) => !prev)
   }
 
   return (
     <section className={`panel ${styles.panelSession}`}>
-      <p className="eyebrow">Mood Books</p>
-      <h1>
+      <header className={styles.sessionHeader}>
+        <p className="eyebrow">Mood Books</p>
+
+        <div className={styles.headerRight}>
+          <p className={styles.sessionName}>{profile.fullName}</p>
+          <button
+            type="button"
+            className={styles.menuToggle}
+            onClick={toggleMenu}
+            aria-expanded={isMenuOpen}
+            aria-controls="session-mobile-menu"
+            aria-label="Mostrar menú del perfil"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <line
+                x1="3"
+                y1="6"
+                x2="21"
+                y2="6"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <line
+                x1="3"
+                y1="12"
+                x2="21"
+                y2="12"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+              <line
+                x1="3"
+                y1="18"
+                x2="21"
+                y2="18"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+              />
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      {isMenuOpen ? (
+        <div
+          id="session-mobile-menu"
+          className={styles.mobileMenu}
+          role="dialog"
+          aria-label="Menú del perfil"
+        >
+          <div className={styles.sessionUser}>
+            {profile.picture ? (
+              <img
+                src={profile.picture}
+                alt={profile.fullName}
+                className={styles.avatar}
+              />
+            ) : (
+              <div
+                className={`${styles.avatar} ${styles.avatarFallback}`}
+                aria-hidden="true"
+              >
+                {profile.initials}
+              </div>
+            )}
+            <p className={styles.sessionName}>{profile.fullName}</p>
+          </div>
+
+          <button
+            className={styles.logoutButton}
+            onClick={handleSignOut}
+            disabled={status.loading}
+          >
+            {status.loading ? 'Cerrando sesión...' : 'Cerrar sesión'}
+          </button>
+        </div>
+      ) : null}
+
+      <h1 className={styles.title}>
         Hola, {profile.fullName.split(' ')[0] || 'lector'}. Tu energía ya
         inspira nuevas recomendaciones.
       </h1>
@@ -53,54 +145,6 @@ export function SessionPanel({ user }) {
         Guarda tus estados de ánimo, sincroniza tu biblioteca y déjanos sugerir
         lecturas que acompañen el momento.
       </p>
-
-      <div className={styles.sessionCard}>
-        <div className={styles.sessionUser}>
-          {profile.picture ? (
-            <img
-              src={profile.picture}
-              alt={profile.fullName}
-              className={styles.avatar}
-            />
-          ) : (
-            <div
-              className={`${styles.avatar} ${styles.avatarFallback}`}
-              aria-hidden="true"
-            >
-              {profile.initials}
-            </div>
-          )}
-
-          <div>
-            <p className={styles.sessionName}>{profile.fullName}</p>
-            <p className={styles.sessionEmail}>{profile.email}</p>
-          </div>
-        </div>
-
-        <dl className={styles.sessionMeta}>
-          <div className={styles.sessionMetaItem}>
-            <dt>ID</dt>
-            <dd>{user.id.slice(0, 8)}...</dd>
-          </div>
-          <div className={styles.sessionMetaItem}>
-            <dt>Último acceso</dt>
-            <dd>{profile.lastSignIn}</dd>
-          </div>
-        </dl>
-      </div>
-
-      <div className={styles.sessionActions}>
-        <button
-          className={styles.logoutButton}
-          onClick={handleSignOut}
-          disabled={status.loading}
-        >
-          {status.loading ? 'Cerrando sesión...' : 'Cerrar sesión'}
-        </button>
-        <button className={styles.secondaryButton} type="button">
-          Ver biblioteca personalizada
-        </button>
-      </div>
 
       {status.error ? <p className={styles.error}>{status.error}</p> : null}
     </section>

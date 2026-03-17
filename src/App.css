@@ -24,7 +24,10 @@
   text-transform: uppercase;
   letter-spacing: 0.35em;
   font-size: 0.75rem;
-  color: var(--accent-muted);
+  background: linear-gradient(40deg, #3730a3, #bd1eb0, #0f766e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: 1rem;
 }
 

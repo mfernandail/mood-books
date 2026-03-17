@@ -1,23 +1,31 @@
 .panelSession {
   width: min(660px, 100%);
   border: 1px solid var(--border-soft);
+  border-radius: 32px;
+  background: #fff;
+  padding: 1.25rem;
+  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.08);
 }
 
-.sessionCard {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  border-radius: 24px;
-  background: #f9f9f6;
-  border: 1px solid var(--border-soft);
+.sessionHeader {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-left: auto;
 }
 
 .sessionUser {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 0.9rem;
 }
 
 .avatar {
@@ -37,51 +45,49 @@
 }
 
 .sessionName {
-  margin: 0;
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-
-.sessionEmail {
-  margin: 0.1rem 0 0;
-  color: var(--ink-soft);
-  font-size: 0.96rem;
-}
-
-.sessionMeta {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 1rem;
-  margin: 0;
-}
-
-.sessionMetaItem {
-  padding: 0.9rem 1rem;
-  border-radius: 16px;
-  background: #fff;
-  border: 1px solid var(--border-soft);
-}
-
-.sessionMetaItem dt {
-  font-size: 0.72rem;
-  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--accent-muted);
-  margin: 0 0 0.35rem;
+  font-size: 0.85rem;
+  background: linear-gradient(40deg, #3730a3, #bd1eb0, #0f766e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
 }
 
-.sessionMetaItem dd {
-  margin: 0;
-  font-size: 0.95rem;
-  color: var(--ink);
+.menuToggle {
+  width: 38px;
+  height: 38px;
+  border: none;
+  background: #fff;
+  cursor: pointer;
 }
 
-.sessionActions {
+.menuToggle span {
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 999px;
+}
+
+.menuToggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-dark);
+}
+
+.mobileMenu {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
-  margin-top: 2rem;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 24px;
+  border: 1px solid var(--border-soft);
+  background: #fffdf8;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 20px 40px rgba(15, 23, 42, 0.05);
 }
+
 .logoutButton {
   flex: 1;
   border: 1px solid var(--accent-dark);
@@ -109,39 +115,37 @@
   box-shadow: none;
 }
 
-.secondaryButton {
-  flex: 1;
-  border-radius: 999px;
-  border: 1px solid var(--border-strong);
-  padding: 0.85rem 1.5rem;
-  background: #fff;
-  color: var(--ink);
-  font-weight: 600;
-  cursor: pointer;
-  transition:
-    border-color 180ms ease,
-    color 180ms ease,
-    background 180ms ease;
-}
-
-.secondaryButton:hover {
-  border-color: var(--accent-dark);
-  color: var(--accent-dark);
-  background: #f6f7fb;
-}
-
 .error {
   color: #e45865;
   margin-top: 1rem;
   min-height: 1.4rem;
 }
 
-@media (max-width: 640px) {
-  .sessionCard {
-    padding: 1.25rem;
+@media (max-width: 650px) {
+  .panelSession {
+    border: 1px solid var(--border-soft);
+    border-radius: 12px;
+    padding: 0.6rem;
   }
 
-  .sessionActions {
-    flex-direction: column;
+  .sessionHeader {
+    padding: 0.1rem 0.1rem;
+    margin-bottom: 0.5rem;
+    max-height: 40px;
+    margin-bottom: 30px;
+  }
+
+  .title {
+    font-size: clamp(1.75rem, 5vw, 2.75rem);
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .lead {
+    margin-top: 20px;
+  }
+
+  .sessionName {
+    display: none;
   }
 }
