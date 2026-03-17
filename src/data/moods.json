@@ -1,0 +1,90 @@
+[
+  {
+    "id": "happy",
+    "label": "Feliz / Eufórico",
+    "emoji": "😄",
+    "color": "amber",
+    "genres": ["adventure", "humor", "fantasy", "comics"],
+    "keywords": ["funny", "uplifting", "epic", "adventure"]
+  },
+  {
+    "id": "calm",
+    "label": "Tranquilo / Sereno",
+    "emoji": "😌",
+    "color": "teal",
+    "genres": ["nature", "poetry", "mindfulness", "travel"],
+    "keywords": ["peaceful", "meditation", "slow life", "nature"]
+  },
+  {
+    "id": "curious",
+    "label": "Curioso / Inspirado",
+    "emoji": "🤔",
+    "color": "blue",
+    "genres": ["science", "philosophy", "essays", "history"],
+    "keywords": ["science", "discovery", "ideas", "knowledge"]
+  },
+  {
+    "id": "sad",
+    "label": "Triste / Melancólico",
+    "emoji": "😔",
+    "color": "coral",
+    "genres": ["literary fiction", "self-help", "drama", "poetry"],
+    "keywords": ["emotional", "healing", "hope", "grief"]
+  },
+  {
+    "id": "anxious",
+    "label": "Ansioso / Estresado",
+    "emoji": "😰",
+    "color": "purple",
+    "genres": ["mindfulness", "humor", "light fiction", "self-help"],
+    "keywords": ["calming", "funny", "stress relief", "mindfulness"]
+  },
+  {
+    "id": "angry",
+    "label": "Enojado / Frustrado",
+    "emoji": "😤",
+    "color": "red",
+    "genres": ["psychology", "thriller", "action", "true crime"],
+    "keywords": ["thriller", "psychology", "action", "justice"]
+  },
+  {
+    "id": "romantic",
+    "label": "Romántico",
+    "emoji": "🥰",
+    "color": "pink",
+    "genres": ["romance", "drama", "epistolary", "literary fiction"],
+    "keywords": ["love", "romance", "passion", "relationships"]
+  },
+  {
+    "id": "bored",
+    "label": "Aburrido / Plano",
+    "emoji": "😶",
+    "color": "gray",
+    "genres": ["thriller", "mystery", "suspense", "sci-fi"],
+    "keywords": ["page-turner", "mystery", "suspense", "gripping"]
+  },
+  {
+    "id": "nostalgic",
+    "label": "Nostálgico",
+    "emoji": "🌅",
+    "color": "green",
+    "genres": ["classics", "memoir", "historical fiction", "short stories"],
+    "keywords": ["nostalgic", "classic", "memories", "coming of age"]
+  },
+  {
+    "id": "motivated",
+    "label": "Motivado / Retador",
+    "emoji": "💪",
+    "color": "teal",
+    "genres": ["biography", "self-improvement", "business", "sports"],
+    "keywords": ["inspiring", "biography", "success", "leadership"]
+  },
+  {
+    "id": "reflective",
+    "label": "Reflexivo",
+    "emoji": "🌙",
+    "color": "purple",
+    "genres": ["stoicism", "philosophy", "diary", "lyric poetry"],
+    "keywords": ["philosophy", "introspection", "stoicism", "wisdom"]
+  }
+]
