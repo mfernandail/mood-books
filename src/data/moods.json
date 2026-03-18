@@ -4,54 +4,68 @@
     "label": "Feliz / Eufórico",
     "emoji": "😄",
     "color": "amber",
-    "genres": ["adventure", "humor", "fantasy", "comics"],
-    "keywords": ["funny", "uplifting", "epic", "adventure"]
+    "description": "Estás en tu mejor momento, ¡aprovéchalo!",
+    "recommendationStrategy": "amplify",
+    "genres": ["adventure", "fantasy", "science fiction", "biography"],
+    "keywords": ["epic", "adventure", "inspiring", "discovery"]
   },
   {
     "id": "calm",
     "label": "Tranquilo / Sereno",
     "emoji": "😌",
     "color": "teal",
-    "genres": ["nature", "poetry", "mindfulness", "travel"],
-    "keywords": ["peaceful", "meditation", "slow life", "nature"]
+    "description": "Buen momento para lecturas profundas.",
+    "recommendationStrategy": "amplify",
+    "genres": ["philosophy", "science", "essays", "history"],
+    "keywords": ["wisdom", "knowledge", "thoughtful", "deep"]
   },
   {
     "id": "curious",
     "label": "Curioso / Inspirado",
     "emoji": "🤔",
     "color": "blue",
-    "genres": ["science", "philosophy", "essays", "history"],
-    "keywords": ["science", "discovery", "ideas", "knowledge"]
+    "description": "Tu mente está abierta y lista para aprender.",
+    "recommendationStrategy": "amplify",
+    "genres": ["science", "technology", "philosophy", "history"],
+    "keywords": ["science", "discovery", "ideas", "innovation"]
   },
   {
     "id": "sad",
     "label": "Triste / Melancólico",
     "emoji": "😔",
     "color": "coral",
-    "genres": ["literary fiction", "self-help", "drama", "poetry"],
-    "keywords": ["emotional", "healing", "hope", "grief"]
+    "description": "Un buen libro puede alegrarte el día.",
+    "recommendationStrategy": "complement",
+    "genres": ["humor", "comedy", "feel-good fiction", "adventure"],
+    "keywords": ["funny", "uplifting", "feel-good", "heartwarming", "comedy"]
   },
   {
     "id": "anxious",
     "label": "Ansioso / Estresado",
     "emoji": "😰",
     "color": "purple",
-    "genres": ["mindfulness", "humor", "light fiction", "self-help"],
-    "keywords": ["calming", "funny", "stress relief", "mindfulness"]
+    "description": "Te ayudamos a encontrar calma entre páginas.",
+    "recommendationStrategy": "complement",
+    "genres": ["mindfulness", "nature", "light fiction", "humor"],
+    "keywords": ["calming", "peaceful", "slow life", "relaxing", "comforting"]
   },
   {
     "id": "angry",
     "label": "Enojado / Frustrado",
     "emoji": "😤",
     "color": "red",
-    "genres": ["psychology", "thriller", "action", "true crime"],
-    "keywords": ["thriller", "psychology", "action", "justice"]
+    "description": "Deja que un libro te devuelva la paz.",
+    "recommendationStrategy": "complement",
+    "genres": ["comedy", "mindfulness", "philosophy", "feel-good fiction"],
+    "keywords": ["funny", "calming", "wisdom", "uplifting", "stoicism"]
   },
   {
     "id": "romantic",
     "label": "Romántico",
     "emoji": "🥰",
     "color": "pink",
+    "description": "El amor y las letras van de la mano.",
+    "recommendationStrategy": "amplify",
     "genres": ["romance", "drama", "epistolary", "literary fiction"],
     "keywords": ["love", "romance", "passion", "relationships"]
   },
@@ -60,14 +74,18 @@
     "label": "Aburrido / Plano",
     "emoji": "😶",
     "color": "gray",
-    "genres": ["thriller", "mystery", "suspense", "sci-fi"],
-    "keywords": ["page-turner", "mystery", "suspense", "gripping"]
+    "description": "El libro perfecto para sacudirte.",
+    "recommendationStrategy": "complement",
+    "genres": ["thriller", "mystery", "suspense", "action", "sci-fi"],
+    "keywords": ["page-turner", "gripping", "mystery", "suspense", "exciting"]
   },
   {
     "id": "nostalgic",
     "label": "Nostálgico",
     "emoji": "🌅",
     "color": "green",
+    "description": "Viaja al pasado o construye el futuro.",
+    "recommendationStrategy": "amplify",
     "genres": ["classics", "memoir", "historical fiction", "short stories"],
     "keywords": ["nostalgic", "classic", "memories", "coming of age"]
   },
@@ -76,15 +94,19 @@
     "label": "Motivado / Retador",
     "emoji": "💪",
     "color": "teal",
+    "description": "Mantén ese impulso con lecturas que inspiran.",
+    "recommendationStrategy": "amplify",
     "genres": ["biography", "self-improvement", "business", "sports"],
-    "keywords": ["inspiring", "biography", "success", "leadership"]
+    "keywords": ["inspiring", "success", "leadership", "growth"]
   },
   {
     "id": "reflective",
     "label": "Reflexivo",
     "emoji": "🌙",
     "color": "purple",
-    "genres": ["stoicism", "philosophy", "diary", "lyric poetry"],
+    "description": "Profundiza en lo que ya estás pensando.",
+    "recommendationStrategy": "amplify",
+    "genres": ["philosophy", "stoicism", "essays", "poetry"],
     "keywords": ["philosophy", "introspection", "stoicism", "wisdom"]
   }
 ]
