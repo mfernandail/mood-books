@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import './App.css'
 import { LoginPanel } from './components/LoginPanel'
+import { MoodGallery } from './components/MoodGallery'
 import { SessionPanel } from './components/SessionPanel'
 import { supabase } from './lib/supabaseClient'
 
@@ -73,7 +74,10 @@ function App() {
       {checkingSession ? (
         <LoadingPanel />
       ) : session ? (
-        <SessionPanel user={session.user} />
+        <div className="session-stack">
+          <SessionPanel user={session.user} />
+          <MoodGallery />
+        </div>
       ) : (
         <LoginPanel />
       )}

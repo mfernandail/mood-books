@@ -1,10 +1,19 @@
 .panelSession {
-  width: min(660px, 100%);
-  border: 1px solid var(--border-soft);
+  width: 100%;
+  /* border: 1px solid var(--border-soft); */
   border-radius: 32px;
-  background: #fff;
+  /* background: #fff; */
   padding: 1.25rem;
-  box-shadow: 0 30px 70px rgba(15, 23, 42, 0.08);
+  /* box-shadow: 0 30px 70px rgba(15, 23, 42, 0.08); */
+}
+
+.panel {
+  width: min(560px, 100%);
+  background: var(--panel-bg);
+  border: 1px solid var(--border-soft);
+  border-radius: 28px;
+  padding: clamp(2rem, 5vw, 3.5rem);
+  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.08);
 }
 
 .sessionHeader {
@@ -12,7 +21,9 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.4rem 0.75rem;
+
+  background: var(--panel-bg);
 }
 
 .headerRight {

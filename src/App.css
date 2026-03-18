@@ -2,18 +2,24 @@
   position: relative;
   min-height: 100vh;
   padding: clamp(2rem, 6vw, 4rem) clamp(1rem, 6vw, 4rem);
+  padding: 0rem clamp(1rem, 6vw, 4rem);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.panel {
-  width: min(560px, 100%);
-  background: var(--panel-bg);
-  border: 1px solid var(--border-soft);
-  border-radius: 28px;
-  padding: clamp(2rem, 5vw, 3.5rem);
-  box-shadow: 0 28px 60px rgba(15, 23, 42, 0.08);
+.page.page--session {
+  align-items: flex-start;
+}
+
+.session-stack {
+  width: min(1100px, 100%);
+  display: grid;
+  /* gap: clamp(1.5rem, 3vw, 2.5rem); */
+}
+
+.session-stack > * {
+  width: 100%;
 }
 
 .panel--loading {
