@@ -18,33 +18,29 @@ const ACCENT_MAP = {
 const GOOGLE_BOOKS_KEY = import.meta.env.VITE_GOOGLE_BOOKS_KEY
 const BOOK_RESULTS_LIMIT = 6
 
-// const buildBooksUrl = (genres) => {
-//   const query = genres.map((genre) => encodeURIComponent(genre)).join('+')
-//   const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${BOOK_RESULTS_LIMIT}&printType=books`
-//   return GOOGLE_BOOKS_KEY ? `${baseUrl}&key=${GOOGLE_BOOKS_KEY}` : baseUrl
-// }
 const buildBooksUrl = (genres) => {
-  const query = genres.join('+')
-  return `/api/books?q=${encodeURIComponent(query)}&maxResults=${BOOK_RESULTS_LIMIT}`
+  const query = genres.map((genre) => encodeURIComponent(genre)).join('+')
+  const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${BOOK_RESULTS_LIMIT}&printType=books`
+  return GOOGLE_BOOKS_KEY ? `${baseUrl}&key=${GOOGLE_BOOKS_KEY}` : baseUrl
 }
 
-// const mapBooksPayload = (items = []) =>
-//   items.map((item) => {
-//     const info = item.volumeInfo ?? {}
+const mapBooksPayload = (items = []) =>
+  items.map((item) => {
+    const info = item.volumeInfo ?? {}
 
-//     return {
-//       id: item.id,
-//       title: info.title ?? 'Título desconocido',
-//       authors: info.authors ?? [],
-//       categories: info.categories ?? [],
-//       thumbnail: info.imageLinks?.thumbnail
-//         ? info.imageLinks.thumbnail.replace('http://', 'https://')
-//         : null,
-//       description: info.description ?? 'Sinopsis no disponible.',
-//       infoLink: info.infoLink ?? info.previewLink ?? null,
-//       publishedDate: info.publishedDate ?? '',
-//     }
-//   })
+    return {
+      id: item.id,
+      title: info.title ?? 'Título desconocido',
+      authors: info.authors ?? [],
+      categories: info.categories ?? [],
+      thumbnail: info.imageLinks?.thumbnail
+        ? info.imageLinks.thumbnail.replace('http://', 'https://')
+        : null,
+      description: info.description ?? 'Sinopsis no disponible.',
+      infoLink: info.infoLink ?? info.previewLink ?? null,
+      publishedDate: info.publishedDate ?? '',
+    }
+  })
 
 export function MoodGallery() {
   const [activeMood, setActiveMood] = useState(null)
@@ -99,8 +95,7 @@ export function MoodGallery() {
         if (isCancelled) {
           return
         }
-        setBooks(data.books)
-        // setBooks(mapBooksPayload(data.items))
+        setBooks(mapBooksPayload(data.items))
       } catch (error) {
         if (isCancelled || error.name === 'AbortError') {
           return
