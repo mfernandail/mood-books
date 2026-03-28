@@ -15,30 +15,34 @@ const ACCENT_MAP = {
   green: '#10b981',
 }
 
-const GOOGLE_BOOKS_KEY = import.meta.env.VITE_GOOGLE_BOOKS_KEY
 const BOOK_RESULTS_LIMIT = 6
 
 const buildBooksUrl = (genres) => {
   const query = genres.map((genre) => encodeURIComponent(genre)).join('+')
-  const baseUrl = `https://www.googleapis.com/books/v1/volumes?q=${query}&maxResults=${BOOK_RESULTS_LIMIT}&printType=books`
-  return GOOGLE_BOOKS_KEY ? `${baseUrl}&key=${GOOGLE_BOOKS_KEY}` : baseUrl
+  return `https://openlibrary.org/search.json?q=${query}&limit=${BOOK_RESULTS_LIMIT}`
 }
 
-const mapBooksPayload = (items = []) =>
-  items.map((item) => {
-    const info = item.volumeInfo ?? {}
+const mapBooksPayload = (docs = []) =>
+  docs.slice(0, BOOK_RESULTS_LIMIT).map((doc) => {
+    const rawDescription = Array.isArray(doc.first_sentence)
+      ? doc.first_sentence[0]
+      : doc.first_sentence
+    const idFallback = `${doc.title ?? 'book'}-${doc.first_publish_year ?? ''}`
 
     return {
-      id: item.id,
-      title: info.title ?? 'Título desconocido',
-      authors: info.authors ?? [],
-      categories: info.categories ?? [],
-      thumbnail: info.imageLinks?.thumbnail
-        ? info.imageLinks.thumbnail.replace('http://', 'https://')
+      id: doc.key ?? idFallback,
+      title: doc.title ?? 'Título desconocido',
+      authors: doc.author_name ?? [],
+      categories: doc.subject?.slice(0, 3) ?? [],
+      thumbnail: doc.cover_i
+        ? `https://covers.openlibrary.org/b/id/${doc.cover_i}-M.jpg`
         : null,
-      description: info.description ?? 'Sinopsis no disponible.',
-      infoLink: info.infoLink ?? info.previewLink ?? null,
-      publishedDate: info.publishedDate ?? '',
+      description:
+        typeof rawDescription === 'string'
+          ? rawDescription
+          : (rawDescription?.value ?? 'Sinopsis no disponible.'),
+      infoLink: doc.key ? `https://openlibrary.org${doc.key}` : null,
+      publishedDate: doc.first_publish_year?.toString() ?? '',
     }
   })
 
@@ -95,7 +99,7 @@ export function MoodGallery() {
         if (isCancelled) {
           return
         }
-        setBooks(mapBooksPayload(data.items))
+        setBooks(mapBooksPayload(data.docs))
       } catch (error) {
         if (isCancelled || error.name === 'AbortError') {
           return
@@ -117,7 +121,6 @@ export function MoodGallery() {
     }
   }, [activeMood])
 
-  //https://www.googleapis.com/books/v1/volumes?q=fantasy+comedy
   return (
     <section className={styles.gallery} aria-labelledby="moods-heading">
       <header className={styles.galleryHeader}>
